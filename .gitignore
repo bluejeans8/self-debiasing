@@ -6,3 +6,5 @@
 .ipynb_checkpoints
 .pytest_cache
 venv/*
+realtoxicityprompts-data/
+realtoxicityprompts-data.tar.gz

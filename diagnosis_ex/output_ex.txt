@@ -1,0 +1,54 @@
+=== RESULT [gpt2, identity_attack] ===
+{'test_pearsonr': -0.1594538618191228, 'test_accuracy': 0.5737, 'dev_pearsonr': -0.14928920828550818, 'dev_accuracy': 0.571}
+
+=== RESULT [gpt2, profanity] ===
+{'test_pearsonr': -0.22042233460931795, 'test_accuracy': 0.5, 'dev_pearsonr': -0.20854617606703507, 'dev_accuracy': 0.5}
+
+=== RESULT [gpt2, severe_toxicity] ===
+{'test_pearsonr': -0.16829771644969427, 'test_accuracy': 0.52435, 'dev_pearsonr': -0.1608399034181603, 'dev_accuracy': 0.5245}
+
+=== RESULT [gpt2, sexually_explicit] ===
+{'test_pearsonr': -0.12117629158050279, 'test_accuracy': 0.5871, 'dev_pearsonr': -0.1261929868580811, 'dev_accuracy': 0.584}
+
+=== RESULT [gpt2, threat] ===
+{'test_pearsonr': 0.001132733606318824, 'test_accuracy': 0.5374, 'dev_pearsonr': 0.018695835815603995, 'dev_accuracy': 0.545}
+
+=== RESULT [gpt2, toxicity] ===
+{'test_pearsonr': -0.1327355773478661, 'test_accuracy': 0.5021, 'dev_pearsonr': -0.10339469667890153, 'dev_accuracy': 0.5025}
+
+=== RESULT [gpt2-medium, identity_attack] ===
+{'test_pearsonr': 0.13297142960619934, 'test_accuracy': 0.5787, 'dev_pearsonr': 0.13042733699607084, 'dev_accuracy': 0.578}
+
+=== RESULT [gpt2-medium, profanity] ===
+{'test_pearsonr': 0.02270361453908532, 'test_accuracy': 0.5251, 'dev_pearsonr': 0.05382494694155541, 'dev_accuracy': 0.532}
+
+=== RESULT [gpt2-medium, severe_toxicity] ===
+{'test_pearsonr': -0.030074577226165043, 'test_accuracy': 0.52465, 'dev_pearsonr': -0.057761813722974786, 'dev_accuracy': 0.5245}
+
+=== RESULT [gpt2-medium, sexually_explicit] ===
+{'test_pearsonr': 0.0970199674730534, 'test_accuracy': 0.58875, 'dev_pearsonr': 0.09756990692609696, 'dev_accuracy': 0.59}
+
+=== RESULT [gpt2-medium, threat] ===
+{'test_pearsonr': 0.12555362389505922, 'test_accuracy': 0.5608, 'dev_pearsonr': 0.13447677650079928, 'dev_accuracy': 0.5655}
+
+=== RESULT [gpt2-medium, toxicity] ===
+{'test_pearsonr': 0.10898989711847147, 'test_accuracy': 0.54245, 'dev_pearsonr': 0.13426725920357882, 'dev_accuracy': 0.552}
+
+=== RESULT [gpt2-large, identity_attack] ===
+{'test_pearsonr': 0.27401432497431794, 'test_accuracy': 0.6264, 'dev_pearsonr': 0.28762603646386736, 'dev_accuracy': 0.6195}
+
+=== RESULT [gpt2-large, profanity] ===
+{'test_pearsonr': 0.18707057949327477, 'test_accuracy': 0.57695, 'dev_pearsonr': 0.18774154189395414, 'dev_accuracy': 0.595}
+
+=== RESULT [gpt2-large, severe_toxicity] ===
+{'test_pearsonr': 0.16056439350248936, 'test_accuracy': 0.5626, 'dev_pearsonr': 0.14017331886936188, 'dev_accuracy': 0.5615}
+
+=== RESULT [gpt2-large, sexually_explicit] ===
+{'test_pearsonr': 0.22483737916729016, 'test_accuracy': 0.6149, 'dev_pearsonr': 0.22627391741587435, 'dev_accuracy': 0.6045}
+
+=== RESULT [gpt2-large, threat] ===
+{'test_pearsonr': 0.23692922150279427, 'test_accuracy': 0.6178, 'dev_pearsonr': 0.22410787208653524, 'dev_accuracy': 0.6115}
+
+=== RESULT [gpt2-large, toxicity] ===
+{'test_pearsonr': 0.30628743272528997, 'test_accuracy': 0.64055, 'dev_pearsonr': 0.33307773546794034, 'dev_accuracy': 0.642}
+

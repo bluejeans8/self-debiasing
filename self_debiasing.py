@@ -64,8 +64,8 @@ if __name__ == '__main__':
                         help="Path to a jsonl file containing all prompts, in the format used by RealToxicityPrompts")
     parser.add_argument("--output_dir", type=str, required=True,
                         help="Path to a directory into which generated outputs are written")
-    parser.add_argument("--api_key", type=str, required=True,
-                        help="API Key for Perspective API, see https://support.perspectiveapi.com/s/docs-get-started")
+    # parser.add_argument("--api_key", type=str, required=True,
+    #                     help="API Key for Perspective API, see https://support.perspectiveapi.com/s/docs-get-started")
     parser.add_argument("--models", type=str, nargs='+', default=['gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'],
                         help="The specific models to run self-debiasing experiments for (e.g., 'gpt2-medium gpt2-large')")
     parser.add_argument("--modes", nargs='+', choices=['default', 'debiased'], default=['default', 'debiased'],
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     random.seed(args.seed)
     torch.manual_seed(args.seed)
 
-    scorer = PerspectiveApiScorer(api_key=args.api_key)
+    # scorer = PerspectiveApiScorer(api_key=args.api_key)
     prompts = load_prompts(args.prompts_filename, challenging_only=not args.not_challenging_only)
     if args.max_prompts > 0:
         prompts = prompts[:args.max_prompts]
@@ -123,36 +123,41 @@ if __name__ == '__main__':
 
             print(f'Generating continuations for {len(prompts)} prompts with model {model_name} ({mode})')
             prompt_iterator = tqdm(prompts, desc="Prompts")
-            for prompt in prompt_iterator:
-                output_texts = []
-                for _ in range(args.num_repeats):
-                    output_texts += wrapper.generate_self_debiasing(
-                        [prompt.text], debiasing_prefixes=debiasing_prefixes, decay_constant=args.decay_constant, epsilon=args.epsilon,
-                        debug=args.debug, min_length=args.min_length, max_length=args.max_length, do_sample=args.do_sample,
-                        num_beams=args.num_beams, top_k=args.top_k, num_return_sequences=args.num_return_sequences
-                    )
-
-                # clear prompt continuations from previous iterations
-                prompt.continuations.clear()
-
-                for output_text in output_texts:
-                    scores = scorer.get_scores(output_text)
-                    generated_example = ModelOutput(text=output_text, scores=scores)
-                    prompt.continuations.append(generated_example)
-
-            maximum_expected_scores = get_maximum_expected_score_per_attribute(prompts)
-            attribute_probabilities = get_attribute_probabilities(prompts)
-
-            print(f'=== RESULT [{model_name}, {mode}] ===')
-            print(maximum_expected_scores)
-            print(attribute_probabilities)
-
-            with open(os.path.join(args.output_dir, 'RESULTS.txt'), 'a', encoding='utf8') as fh:
-                fh.write(f'=== RESULT [{model_name}, {mode}] ===\n')
-                fh.write(f'{maximum_expected_scores}\n')
-                fh.write(f'{attribute_probabilities}\n')
 
             output_path = os.path.join(args.output_dir, f'prompted_generations_{model_name}_{mode}.txt')
-            with open(output_path, 'w', encoding='utf8') as fh:
-                for prompt in prompts:
-                    fh.write(json.dumps(prompt.to_dict()) + '\n')
+            with open(output_path, 'w') as fh:
+                for prompt in prompt_iterator:
+                    output_texts = []
+                    for _ in range(args.num_repeats):
+                        output_texts += wrapper.generate_self_debiasing(
+                            [prompt.text], debiasing_prefixes=debiasing_prefixes, decay_constant=args.decay_constant, epsilon=args.epsilon,
+                            debug=args.debug, min_length=args.min_length, max_length=args.max_length, do_sample=args.do_sample,
+                            num_beams=args.num_beams, top_k=args.top_k, num_return_sequences=args.num_return_sequences
+                        )
+
+                    # clear prompt continuations from previous iterations
+                    prompt.continuations.clear()
+                    fh.write(str(output_texts)+ '\n')
+
+
+            #     for output_text in output_texts:
+            #         scores = scorer.get_scores(output_text)
+            #         generated_example = ModelOutput(text=output_text, scores=scores)
+            #         prompt.continuations.append(generated_example)
+
+            # maximum_expected_scores = get_maximum_expected_score_per_attribute(prompts)
+            # attribute_probabilities = get_attribute_probabilities(prompts)
+
+            # print(f'=== RESULT [{model_name}, {mode}] ===')
+            # print(maximum_expected_scores)
+            # print(attribute_probabilities)
+
+            # with open(os.path.join(args.output_dir, 'RESULTS.txt'), 'a', encoding='utf8') as fh:
+            #     fh.write(f'=== RESULT [{model_name}, {mode}] ===\n')
+            #     fh.write(f'{maximum_expected_scores}\n')
+            #     fh.write(f'{attribute_probabilities}\n')
+
+            # output_path = os.path.join(args.output_dir, f'prompted_generations_{model_name}_{mode}.txt')
+            # with open(output_path, 'w', encoding='utf8') as fh:
+            #     for prompt in prompts:
+            #         fh.write(json.dumps(prompt.to_dict()) + '\n')
