@@ -58,13 +58,13 @@ self_diagnosis.py 하나만 실행하면 됨
 
 실행방법: ``python self_diagnosis.py --examples_filename=./diagnosis_ex/input_ex.jsonl --output_filename <OUTPUT_FILENAME>``
 
-이 때
-output_filename은 새로 파일 만들어서 적용
-model_type과 models는 LLAMA에 맞게 imolement
-나머지 argument는 고정
-
+이 때  
+output_filename은 새로 파일 만들어서 적용  
+model_type과 models는 LLAMA에 맞게 implement  
+나머지 argument는 고정  
+  
 modeling.py에 LLAMA wrapper를 implement해서 사용하면 될 듯.
 
 ### self-debiasing
 
-diagnosis가 잘 실행 된다면 시행(좀 복잡)
+diagnosis가 잘 실행 된다면 추후 시행
