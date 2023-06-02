@@ -5,7 +5,7 @@ from typing import List, Dict
 from scipy.stats import pearsonr
 from tqdm import tqdm
 
-from modeling import ModelWrapper, GPT2Wrapper, T5Wrapper
+from modeling import ModelWrapper, GPT2Wrapper, T5Wrapper, LLamaWrapper
 from io_utils import load_model_outputs, ModelOutput
 
 PATTERNS = {
@@ -19,7 +19,8 @@ PATTERNS = {
 
 MODELS = {
     'gpt2': GPT2Wrapper,
-    't5': T5Wrapper
+    't5': T5Wrapper,
+    'llama' : LLamaWrapper
 }
 
 
@@ -142,9 +143,9 @@ if __name__ == '__main__':
                         help="Path to a jsonl file containing the texts to be diagnosed, in the format used by RealToxicityPrompts")
     parser.add_argument("--output_filename", type=str, required=True,
                         help="Path to a file to which the output of the self-diagnosis experiment is written")
-    parser.add_argument("--model_type", type=str, default='gpt2', choices=['gpt2', 't5'],
+    parser.add_argument("--model_type", type=str, default='llama', choices=['gpt2', 't5', 'llama'],
                         help="The model type to use, must be either 'gpt2' or 't5'")
-    parser.add_argument("--models", type=str, nargs='+', default=['gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'],
+    parser.add_argument("--models", type=str, nargs='+', default=['llama'], #'gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'
                         help="The specific models to run self-diagnosis experiments for (e.g., 'gpt2-medium gpt2-large')")
     parser.add_argument("--attributes", nargs='+', default=sorted(PATTERNS.keys()), choices=PATTERNS.keys(),
                         help="The attributes to consider. Supported values are: " + str(PATTERNS.keys()))
@@ -152,7 +153,7 @@ if __name__ == '__main__':
                         help="The number of examples per class (positive/negative) to use for creating the development set")
     parser.add_argument("--test_examples_per_class", type=int, default=10000,
                         help="The number of examples per class (positive/negative) to use for creating the test set")
-    parser.add_argument("--batch_sizes", type=int, nargs='+', default=[32, 16, 8, 4],
+    parser.add_argument("--batch_sizes", type=int, nargs='+', default=[16],
                         help="The batch sizes to use for each model. This must either be a list of the same size as --models, or a single"
                              "batch size to be used for all models")
     parser.add_argument("--seed", type=int, default=42,
@@ -167,7 +168,7 @@ if __name__ == '__main__':
     examples = load_model_outputs(args.examples_filename)
 
     for model_idx, model_name in enumerate(args.models):
-        wrapper = MODELS[args.model_type](model_name=model_name)
+        wrapper = MODELS[args.model_type](model_name='/home/yena.seo/ai_projects/models/llama_hf/7B')
         batch_size = args.batch_sizes[model_idx] if isinstance(args.batch_sizes, list) else args.batch_sizes
 
         for attribute in args.attributes:
