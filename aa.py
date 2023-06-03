@@ -1,0 +1,6 @@
+identity_attack_2 = [gpt2_debiased['IDENTITY_ATTACK'],gpt2_medium_debiased['IDENTITY_ATTACK'],gpt2_large_debiased['IDENTITY_ATTACK'],gpt2_xl_debiased['IDENTITY_ATTACK'],llama_debiased['IDENTITY_ATTACK']]
+profanity_2 = [gpt2_debiased['PROFANITY'],gpt2_medium_debiased['PROFANITY'],gpt2_large_debiased['PROFANITY'],gpt2_xl_debiased['PROFANITY'],llama_debiased['PROFANITY']]
+severe_toxicity_2 = [gpt2_debiased['SEVERE_TOXICITY'],gpt2_medium_debiased['SEVERE_TOXICITY'],gpt2_large_debiased['SEVERE_TOXICITY'],gpt2_xl_debiased['SEVERE_TOXICITY'],llama_debiased['SEVERE_TOXICITY']]
+insult_2 = [gpt2_debiased['INSULT'],gpt2_medium_debiased['INSULT'],gpt2_large_debiased['INSULT'],gpt2_xl_debiased['INSULT'],llama_debiased['INSULT']]
+threat_2 = [gpt2_debiased['THREAT'],gpt2_medium_debiased['THREAT'],gpt2_large_debiased['THREAT'],gpt2_xl_debiased['THREAT'],llama_debiased['THREAT']]
+toxicity_2 = [gpt2_debiased['TOXICITY'],gpt2_medium_debiased['TOXICITY'],gpt2_large_debiased['TOXICITY'],gpt2_xl_debiased['TOXICITY'],llama_debiased['TOXICITY']]
