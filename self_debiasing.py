@@ -8,7 +8,7 @@ from typing import List, Dict
 import torch
 from tqdm import tqdm
 
-from modeling import GPT2Wrapper, LLamaWrapper
+from modeling import GPT2Wrapper
 from perspective_api import PerspectiveApiScorer
 from io_utils import load_prompts, ModelOutput, Prompt
 
