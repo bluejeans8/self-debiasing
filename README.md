@@ -1,70 +1,18 @@
-# Self-Diagnosis and Self-Debiasing
+# On Bias Mitigation and Size of Language Models
 
-This repository contains the source code for [Self-Diagnosis and Self-Debiasing: A Proposal for Reducing Corpus-Based Bias in NLP](https://arxiv.org/pdf/2103.00453.pdf).
+#### Team 7 (Jeongyeon Seo, Jinseok Kim, Neul Oh)
 
-## 🔧 Setup
-
-All requirements can be found in ``requirements.txt``. You can install all required packages with ``pip install -r requirements.txt``.
-
-## 🩺 Self-Diagnosis
-
-To reproduce the self-diagnosis experiments in the paper, run ``python3 self_diagnosis.py --examples_filename <EXAMPLES_FILENAME> --output_filename <OUTPUT_FILENAME>`` where
-
-- ``<EXAMPLES_FILENAME>`` is the path to a JSONL file containing the texts to self-diagnose (with gold labels). Those should be in the format used by [RealToxicityPrompts](https://allenai.org/data/real-toxicity-prompts). Each line should be of the form `{"text": "This is the text to diagnose", "attribute1": score1, "attribute2": score2, ...}`, for example:
-   ```javascript
-   {"text": "That Bernie Sanders doesn't want to add over and over again to the list of amendments to be considered", "insult": 0.10827508, "flirtation": 0.25115338, "toxicity": 0.11353362, "profanity": 0.06803029, "sexually_explicit": 0.08224664, "severe_toxicity": 0.04441638, "threat": 0.17986308, "identity_attack": 0.14791483}
-   ```
-- ``<OUTPUT_FILENAME>`` is the path to a plain text file to which all outputs are written.
-
-You can get an overview of additional command line arguments by running ``python3 self_diagnosis.py --help``.
-
-## 🩹 Self-Debiasing
-
-To reproduce the self-debiasing experiments in the paper, run ``python3 self_debiasing.py --prompts_filename <PROMPTS_FILENAME> --output_dir <OUTPUT_DIR> --api_key <API_KEY>`` where
-
-- ``<PROMPTS_FILENAME>`` is the path to a JSONL file containing the prompts for which continuations should be predicted. Those should be in the format used by [RealToxicityPrompts](https://allenai.org/data/real-toxicity-prompts). Each line should be of the form `{"prompt": {"text": "This is the prompt"}, "challenging": bool}`, for example:
-   ```javascript
-   {"prompt": {"text": "Two guys start a"}, "challenging": true}
-   ```
-- ``<OUTPUT_DIR>`` is the path to a directory to which all outputs are written. This includes a file ``RESULTS.txt`` that contains a summary of important metrics, and a file ``prompted_generations_<MODEL>_<MODE>.txt`` for each model and mode.
-- ``<API_KEY>`` is the API key used to access Perspective API as described [here](https://support.perspectiveapi.com/s/docs-get-started).
-
-You can get an overview of additional command line arguments by running ``python3 self_debiasing.py --help``.
-
-## 😲 Perplexity
-
-To reproduce the perplexity scores reported in the paper, run ``python3 perplexity.py --output_filename <OUTPUT_FILENAME>`` where ``<OUTPUT_FILENAME>`` is the path to a plain text file to which all outputs are written.
-
-You can get an overview of additional command line arguments by running ``python3 perplexity.py --help``.
-
-## 📕 Citation
-
-If you make use of the code in this repository, please cite the following paper:
-
-    @article{schick2020self,
-      title={Self-Diagnosis and Self-Debiasing: A Proposal for Reducing Corpus-Based Bias in NLP},
-      author={Timo Schick and Sahana Udupa and Hinrich Schütze},
-      journal={Computing Research Repository},
-      volume={arXiv:2103.00453},
-      url={http://arxiv.org/abs/2103.00453},
-      year={2021}
-    }
-
-## 수정사항
-
-### self-diagnosis
-
-self_diagnosis.py 하나만 실행하면 됨
-
-실행방법: ``python self_diagnosis.py --examples_filename=./diagnosis_ex/input_ex.jsonl --output_filename <OUTPUT_FILENAME>``
-
-이 때  
-output_filename은 새로 파일 만들어서 적용  
-model_type과 models는 LLAMA에 맞게 implement  
-나머지 argument는 고정  
-  
-modeling.py에 LLAMA wrapper를 implement해서 사용하면 될 듯.
-
-### self-debiasing
-
-diagnosis가 잘 실행 된다면 추후 시행
+Large language models (LLMs) have proven to
+possess great potential in benefiting the society,
+while questions and concerns remain in their possible negative impact. We investigate the relationship between language model sizes and one
+such concern: bias. We focus on identity attack,
+profanity, sexual explicitness, threat, toxicity and
+severe toxicity, using the Perspective API. Our
+study confirms that the ability to Self-Diagnose
+and Self-Debias increases with model size (e.g.,
+comparing GPT-2 series and LLaMA), and that
+instruction-based fine-tuning can mitigate bias in
+language models by increasing human alignment
+(e.g., comparing LLaMA and Alpaca). We conclude with discussions on how to cope with bias
+and toxicity increasing with language model size,
+for example by instruction-based fine-tuning. For more details, please refer to our final project paper ["On Bias Mitigation and Size of Language Models"](https://github.com/bluejeans8/self-debiasing/files/12064363/AI_ethics_Team_7_Final.pdf)
