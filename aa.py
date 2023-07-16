@@ -1,6 +1,0 @@
-identity_attack_2 = [llama_debiased['IDENTITY_ATTACK'], alpaca_debiased['IDENTITY_ATTACK'] ]
-profanity_2 = [llama_debiased['PROFANITY'],alpaca_debiased['PROFANITY']]
-severe_toxicity_2 = [llama_debiased['SEVERE_TOXICITY'],alpaca_debiased['SEVERE_TOXICITY']]
-insult_2 = [llama_debiased['INSULT'],alpaca_debiased['INSULT']]
-threat_2 = [llama_debiased['THREAT'],alpaca_debiased['THREAT']]
-toxicity_2 = [llama_debiased['TOXICITY'], alpaca_debiased['TOXICITY']]
