@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 labels = ['identity_attack', 'profanity', 'severe_toxicity', 'insult', 'threat', 'toxicity']
-model = ['gpt2','gpt2-medium','gpt2-large', 'gpt2-xl', 'llama']
+model = ['gpt2\n(123M)','gpt2-medium\n(355M)','gpt2-large\n(774M)', 'gpt2-xl\n(1.5B)', 'llama\n(7B)']
 
 ### default graph
 
@@ -25,13 +25,13 @@ attributes_1 = [identity_attack_1, profanity_1, severe_toxicity_1, insult_1, thr
 avg_1 = [0,0,0,0,0]
 
 for i in range(len(attributes_1)):
-    plt.scatter(model, attributes_1[i], label=labels[i])
+    # plt.scatter(model, attributes_1[i], label=labels[i])
     for j in range(5):
         avg_1[j]+=attributes_1[i][j]
 for j in range(5):
     avg_1[j]/=6
 
-plt.plot(model, avg_1, color='blue')
+# plt.plot(model, avg_1, color='blue')
 
 
 ### debiasing graph
@@ -54,54 +54,66 @@ attributes_2 = [identity_attack_2, profanity_2, severe_toxicity_2, insult_2, thr
 avg_2 = [0,0,0,0,0]
 
 for i in range(len(attributes_2)):
-    plt.scatter(model, attributes_2[i], label=labels[i])
+    # plt.scatter(model, attributes_2[i], label=labels[i])
     for j in range(5):
         avg_2[j]+=attributes_2[i][j]
 for j in range(5):
     avg_2[j]/=6
 
-plt.plot(model, avg_2, color='red')
+# plt.plot(model, avg_2, color='red')
 
 ######
 
-diff_abs = [0,0,0,0,0]
-diff_rel = [0,0,0,0,0]
+# diff_abs = [0,0,0,0,0]
+# diff_rel = [0,0,0,0,0]
 
-for i in range(5):
-    diff_abs[i] = avg_1[i] - avg_2[i]
+# for i in range(5):
+#     diff_abs[i] = avg_1[i] - avg_2[i]
 
-for i in range(5):
-    diff_rel[i] = (avg_1[i] - avg_2[i]) / avg_1[i]
+# for i in range(5):
+#     diff_rel[i] = (avg_1[i] - avg_2[i]) / avg_1[i]
 
-print("diff_abs:", diff_abs)
-print("diff_rel:", diff_rel)
-
-######
-
-for j in range(len(attributes_1)):
-
-    diff_abs = [0,0,0,0,0]
-    diff_rel = [0,0,0,0,0]
-
-    for i in range(5):
-        diff_abs[i] = attributes_1[j][i] - attributes_2[j][i]
-
-    for i in range(5):
-        diff_rel[i] = (attributes_1[j][i] - attributes_2[j][i]) / attributes_1[j][i]
-
-    print(labels[j])
-    print("diff_abs:", diff_abs)
-    print("diff_rel:", diff_rel)
+# print("diff_abs:", diff_abs)
+# print("diff_rel:", diff_rel)
 
 ######
 
+# for j in range(len(attributes_1)):
+
+#     diff_abs = [0,0,0,0,0]
+#     diff_rel = [0,0,0,0,0]
+
+#     for i in range(5):
+#         diff_abs[i] = attributes_1[j][i] - attributes_2[j][i]
+
+#     for i in range(5):
+#         diff_rel[i] = (attributes_1[j][i] - attributes_2[j][i]) / attributes_1[j][i]
+
+#     print(labels[j])
+#     print("diff_abs:", diff_abs)
+#     print("diff_rel:", diff_rel)
+
+######
 
 
 
 
-# plt.xlabel('model', fontweight='bold')
-# plt.ylabel('rate', fontweight='bold')
+plt.figure(figsize = (10, 5))
+plt.xlabel('Model', fontweight='bold')
+plt.ylabel('Average probabilities', fontweight='bold')
 # plt.legend(fontsize=8)
 
-# plt.savefig('image_debiasing_rate.png',bbox_inches='tight')
+idx = np.arange(5)
+
+w = 0.3
+
+plt.bar(idx-0.5*w, avg_1, label='default', width=w, color='#FFB6C1')
+plt.bar(idx+0.5*w, avg_2, label='debiased', width=w, color='#B0E0E6')
+plt.xticks(idx, model)
+
+plt.legend(fontsize=8, ncol=1)
+
+
+
+plt.savefig('image_debiasing_rate.png',bbox_inches='tight')
 
