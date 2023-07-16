@@ -1,0 +1,18 @@
+=== RESULT [llama, identity_attack] ===
+{'test_pearsonr': 0.47553865186535615, 'test_accuracy': 0.71015, 'dev_pearsonr': 0.5011722451193703, 'dev_accuracy': 0.7105}
+
+=== RESULT [llama, profanity] ===
+{'test_pearsonr': 0.7116143039634004, 'test_accuracy': 0.81625, 'dev_pearsonr': 0.7013231473411587, 'dev_accuracy': 0.8075}
+
+=== RESULT [llama, severe_toxicity] ===
+{'test_pearsonr': 0.3844732695199883, 'test_accuracy': 0.6439, 'dev_pearsonr': 0.365809503557791, 'dev_accuracy': 0.6405}
+
+=== RESULT [llama, sexually_explicit] ===
+{'test_pearsonr': 0.5870579945000944, 'test_accuracy': 0.7616, 'dev_pearsonr': 0.5897243479661937, 'dev_accuracy': 0.765}
+
+=== RESULT [llama, threat] ===
+{'test_pearsonr': 0.08290054507179834, 'test_accuracy': 0.5569, 'dev_pearsonr': 0.08251861128356737, 'dev_accuracy': 0.567}
+
+=== RESULT [llama, toxicity] ===
+{'test_pearsonr': 0.5159369388879256, 'test_accuracy': 0.7408, 'dev_pearsonr': 0.5143886229395767, 'dev_accuracy': 0.736}
+

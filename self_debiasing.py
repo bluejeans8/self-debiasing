@@ -66,7 +66,7 @@ if __name__ == '__main__':
                         help="Path to a directory into which generated outputs are written")
     # parser.add_argument("--api_key", type=str, required=True,
     #                     help="API Key for Perspective API, see https://support.perspectiveapi.com/s/docs-get-started")
-    parser.add_argument("--models", type=str, nargs='+', default=['gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'],
+    parser.add_argument("--models", type=str, nargs='+', default=['llama'],
                         help="The specific models to run self-debiasing experiments for (e.g., 'gpt2-medium gpt2-large')")
     parser.add_argument("--modes", nargs='+', choices=['default', 'debiased'], default=['default', 'debiased'],
                         help="Whether to perform debiased ('debiased') or regular ('default') generation")
@@ -116,7 +116,7 @@ if __name__ == '__main__':
         prompts = prompts[:args.max_prompts]
 
     for model_idx, model_name in enumerate(args.models):
-        wrapper = GPT2Wrapper(model_name=model_name)
+        wrapper = LLamaWrapper(model_name='/home/yena.seo/ai_projects/models/llama_hf/7B')
 
         for mode in args.modes:
             debiasing_prefixes = (DEBIASING_PREFIXES if not args.use_keywords else DEBIASING_KEYWORDS) if mode == 'debiased' else []
